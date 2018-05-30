@@ -49,4 +49,9 @@ module.exports = {
         if (action.type === "TOOGLE_SHOW_GROUPED") return !state;
         return state;
     },
+
+    filter_category(state = null, action) {
+        if(action.type === "SET_CATEGORY_FILTER") return action.category;
+        return state;
+    }
 }

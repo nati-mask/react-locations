@@ -36,6 +36,10 @@ module.exports = {
         return { type: "STOP_LOADING" };
     },
 
+    setCategoryFilter(category) {
+        return { type: "SET_CATEGORY_FILTER", category };
+    },
+
     toogleShowGrouped() {
         return { type: "TOOGLE_SHOW_GROUPED" };
     }

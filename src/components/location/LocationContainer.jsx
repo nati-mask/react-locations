@@ -4,7 +4,7 @@ const uuid = require('uuid/v4');
 
 const { createLocation, updateLocation, setPage } = require('../../actions');
 
-const store = require('../../store');
+const data_manager = require('../../data-manager');
 
 class LocationContainer extends React.Component {
     constructor(props) {
@@ -84,10 +84,7 @@ module.exports = connect(state => {
             else dispatch(updateLocation(this.state.location.id, this.state.location));
             dispatch(setPage('LocationsList'));
 
-            // TODO: Extract to better model, debounce, save to database, etc;
-            setTimeout(() => {
-                window.localStorage.setItem('myLocationsData', JSON.stringify(store.getState().locations));
-            });
+            data_manager.save();
         },
     }
 

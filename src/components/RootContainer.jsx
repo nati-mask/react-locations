@@ -14,7 +14,7 @@ class RootContainer extends React.Component {
         super(props);
         this.loadData();
     }
-    // TODO: extract
+    // TODO: extract to "data-manager"
     loadData() {
         return new Promise(resolve => {
             setTimeout(() => {

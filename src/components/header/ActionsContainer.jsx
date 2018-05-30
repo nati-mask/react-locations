@@ -26,9 +26,9 @@ class ActionsContainer extends React.Component {
         return (
             <div style={{float : "right"}}>
                 { this.props.page === "LocationsList" && <button onClick={this.addLocation.bind(this)}>Add</button> }
-                { this.props.page === "LocationsList" &&
+                { this.props.page === "LocationsList" && !this.props.filter_category &&
                     <button onClick={this.props.toogleShowGrouped.bind(this)}>
-                        { this.props.show_grouped ? "Show All" : "Show Groups" }
+                        { this.props.show_grouped ? "Show All" : "Show By Groups" }
                     </button>
                 }
                 { this.props.selected_location && <button onClick={this.editLocation.bind(this)}>Edit</button> }
@@ -44,6 +44,7 @@ module.exports = connect(state => {
     return {
         page: state.page,
         selected_location: state.selected_location,
+        filter_category: state.filter_category,
         show_grouped : state.show_grouped,
     }
 
