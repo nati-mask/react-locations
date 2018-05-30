@@ -27,11 +27,13 @@
     "es6-promise": "^4.2.4",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
+    "lodash": "^4.17.10",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "style-loader": "^0.21.0",
+    "uuid": "^3.2.1",
     "webpack": "^4.10.2",
     "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^3.1.4"

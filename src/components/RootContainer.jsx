@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 const { setPage } = require('../actions');
 
-const Location = require('./location/Location.jsx');
+const LocationContainer = require('./location/LocationContainer.jsx');
 const Header = require('./header/Header.jsx');
-const LocationsList = require('./locations-list/LocationsList.jsx');
+const LocationsListContainer = require('./locations-list/LocationsListContainer.jsx');
 
 class RootContainer extends React.Component {
     constructor(props) {
@@ -13,10 +13,10 @@ class RootContainer extends React.Component {
     renderPage() {
         switch (this.props.page) {
             case "Location":
-                return <Location />
+                return <LocationContainer />
         
             default:
-                return <LocationsList />
+                return <LocationsListContainer />
         }
     }
     render() {
@@ -24,7 +24,7 @@ class RootContainer extends React.Component {
             <div>
                 <Header pageTitle={ this.props.page } />
                 { this.renderPage() }
-                <button onClick={ this.props.navClick.bind(this, "Zvulkunb") }>Nav</button>
+                <button onClick={ this.props.navClick.bind(this, "Categories") }>Nav</button>
             </div>
         )
     }
@@ -40,7 +40,6 @@ module.exports = connect(state => {
 
     return {
         navClick : (page, e) => {
-            console.log('Args of navClick:', page, e);
             dispatch(setPage(page));
         }
     }
