@@ -30,7 +30,7 @@ class LocationListContainer extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="page locations-list">
                 <ActionsContainer />
                 { _.map(this.props.location_groups, (locations, group_name) =>
                     <div key={group_name}>
@@ -62,7 +62,6 @@ module.exports = connect(state => {
 
     return {
         selected_location : state.selected_location,
-        categories : _.uniq(_.map(state.locations, location => location.category)),
         location_groups : sortGroups(location_groups),
         filter_category: state.filter_category,
     }

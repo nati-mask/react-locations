@@ -13,10 +13,27 @@ const NavContainer = require('./nav/NavContainer.jsx');
 const LocationsListContainer = require('./locations-list/LocationsListContainer.jsx');
 const CategoriesListContainer = require('./categories-list/CategoriesListContainer.jsx');
 
+require('./RootContainer.less');
+
 class RootContainer extends React.Component {
     constructor(props) {
         super(props);
         data_manager.load();
+    }
+    getTitle(pageRoute) {
+        // This is bad, just for the first impression. Time is over:
+        switch (pageRoute) {
+            case "LocationEdit":
+                return "Location";
+            case "LocationView":
+                return "Location";
+            case "LocationsList":
+                return "Locations List";
+            case "CategoriesList":
+                return "Categories";
+            default:
+                return "404";
+        }
     }
     renderPage() {
         switch (this.props.page) {
@@ -43,7 +60,7 @@ class RootContainer extends React.Component {
 
         return (
             <div>
-                <Header pageTitle={ this.props.page } />
+                <Header pageTitle={ this.getTitle(this.props.page) } />
                 { this.renderPage() }
                 <NavContainer />
             </div>

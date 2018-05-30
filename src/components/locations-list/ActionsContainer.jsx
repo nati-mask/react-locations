@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const { setPage, deselectLocation, removeLocation, toogleShowGrouped } = require('../../actions');
+const { setPage, setCategoryFilter, deselectLocation, removeLocation, toogleShowGrouped } = require('../../actions');
+
+require('./ActionsContainer.less');
 
 class ActionsContainer extends React.Component {
     constructor(props) {
@@ -24,9 +26,9 @@ class ActionsContainer extends React.Component {
     }
     render() {
         return (
-            <div>
-                <button onClick={this.addLocation.bind(this)}>Add</button>
-                <select onChange={this.props.setCatogoryFilter} value={this.props.filter_category || "no-filter"}>
+            <div className="action-container">
+                <i className="material-icons add-button" onClick={this.addLocation.bind(this)}> add_circle </i>
+                <select className="categ-select" onChange={this.props.setCatogoryFilter} value={this.props.filter_category || "no-filter"}>
                     <option value="no-filter">show all categories</option>
                     {_.map(this.props.categories, category =>
                         <option key={category} value={category}>
@@ -34,10 +36,10 @@ class ActionsContainer extends React.Component {
                         </option>
                     )}
                 </select>
-                {!this.props.filter_category &&
-                    <button onClick={this.props.toogleShowGrouped.bind(this)}>
-                        {this.props.show_grouped ? "Show All" : "Show By Groups"}
-                    </button>
+                { !this.props.filter_category &&
+                    <i className="material-icons grouped-select" onClick={this.props.toogleShowGrouped.bind(this)}>
+                        { this.props.show_grouped ? "view_headline" : "view_agenda" }
+                    </i>
                 }
                 { this.props.selected_location &&
                     <div style={{float:"right"}}>
@@ -58,6 +60,7 @@ module.exports = connect(state => {
         selected_location: state.selected_location,
         filter_category: state.filter_category,
         show_grouped: state.show_grouped,
+        categories: _.uniq(_.map(state.locations, location => location.category)),
     }
 
 }, dispatch => {
