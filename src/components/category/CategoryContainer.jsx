@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 const { removeCategory, updateCategory } = require('../../actions');
 const data_manager = require('../../data-manager');
 
+require('./CategoryContainer.less');
+
 class CategoryContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -24,18 +26,18 @@ class CategoryContainer extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="category">
                 { this.state.edit &&
                     <div>
-                    <input type="text" onChange={this.setCategoryName.bind(this)} value={this.state.category_name} />
-                    <button onClick={this.save.bind(this)}>Save</button>
+                    <input className="text-input" type="text" onChange={this.setCategoryName.bind(this)} value={this.state.category_name} />
+                    <i className="material-icons item-action" onClick={this.save.bind(this)}>check_circle</i>
                     </div>
                 }
                 { !this.state.edit &&
                     <div>
-                        { this.props.category.name }
-                        <button onClick={this.toogleEdit.bind(this)}>Edit</button>
-                        <button onClick={this.props.removeCategory.bind(this)}>Remove</button>
+                        <span className="categ-name"> { this.props.category.name } </span>
+                        <i className="material-icons item-action" onClick={this.toogleEdit.bind(this)}>edit</i>
+                        <i className="material-icons item-action" onClick={this.props.removeCategory.bind(this)}>delete</i>
                     </div>
                 }
             </div>

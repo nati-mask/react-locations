@@ -4,6 +4,8 @@ const { createCategory } = require('../../actions');
 const uuid = require('uuid/v4');
 const data_manager = require('../../data-manager');
 
+require('./AddCategoryContainer.less');
+
 class CategoriesActionsContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -17,13 +19,9 @@ class CategoriesActionsContainer extends React.Component {
     }
     render() {
         return (
-            <div>
-                <input type="text" value={this.state.new_category_name} onInput={this.setNewCategoryName.bind(this)} />
-                <button onClick={this.props.createCategory.bind(this)}>Add</button>
-                {/*
-                {this.props.selected_location && <button onClick={this.editLocation.bind(this)}>Edit</button>}
-                {this.props.selected_location && <button onClick={this.removeLocation.bind(this)}>Remove</button>}
-                */}
+            <div className="add-category">
+                <input className="text-input" type="text" value={this.state.new_category_name} onInput={this.setNewCategoryName.bind(this)} />
+                <i className="material-icons item-action" onClick={this.props.createCategory.bind(this)}>check_circle</i>
             </div>
         )
     }
