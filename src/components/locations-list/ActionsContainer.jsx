@@ -24,16 +24,28 @@ class ActionsContainer extends React.Component {
     }
     render() {
         return (
-            <div style={{float : "right"}}>
-                { this.props.page === "LocationsList" && <button onClick={this.addLocation.bind(this)}>Add</button> }
-                { this.props.page === "LocationsList" && !this.props.filter_category &&
+            <div>
+                <button onClick={this.addLocation.bind(this)}>Add</button>
+                <select onChange={this.props.setCatogoryFilter} value={this.props.filter_category || "no-filter"}>
+                    <option value="no-filter">show all categories</option>
+                    {_.map(this.props.categories, category =>
+                        <option key={category} value={category}>
+                            Show Only: {category}
+                        </option>
+                    )}
+                </select>
+                {!this.props.filter_category &&
                     <button onClick={this.props.toogleShowGrouped.bind(this)}>
-                        { this.props.show_grouped ? "Show All" : "Show By Groups" }
+                        {this.props.show_grouped ? "Show All" : "Show By Groups"}
                     </button>
                 }
-                { this.props.selected_location && <button onClick={this.editLocation.bind(this)}>Edit</button> }
-                { this.props.selected_location && <button onClick={this.removeLocation.bind(this)}>Remove</button> }
-                { this.props.selected_location && <button onClick={this.viewLocation.bind(this)}>View</button> }
+                { this.props.selected_location &&
+                    <div style={{float:"right"}}>
+                        <button onClick={this.editLocation.bind(this)}>Edit</button>
+                        <button onClick={this.removeLocation.bind(this)}>Remove</button>
+                        <button onClick={this.viewLocation.bind(this)}>View</button>
+                    </div>
+                }
             </div>
         )
     }
@@ -45,12 +57,16 @@ module.exports = connect(state => {
         page: state.page,
         selected_location: state.selected_location,
         filter_category: state.filter_category,
-        show_grouped : state.show_grouped,
+        show_grouped: state.show_grouped,
     }
 
 }, dispatch => {
 
     return {
+        setCatogoryFilter(e) {
+            if (e.target.value === 'no-filter') dispatch(setCategoryFilter(null));
+            else dispatch(setCategoryFilter(e.target.value));
+        },
         deselectLocation: () => {
             dispatch(deselectLocation());
         },

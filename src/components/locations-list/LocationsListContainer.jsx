@@ -4,6 +4,8 @@ const _ = require('lodash');
 
 const { selectLocation, deselectLocation, setCategoryFilter } = require('../../actions');
 
+const ActionsContainer = require('./ActionsContainer.jsx');
+
 function makeGroups(locations) {
     let groups = {};
     _.map(locations, location => {
@@ -29,16 +31,7 @@ class LocationListContainer extends React.Component {
     render() {
         return (
             <div>
-                <div>
-                    <select onChange={this.props.setCatogoryFilter} value={this.props.filter_category || "no-filter"}>
-                        <option value="no-filter">show all categories</option>
-                        { _.map(this.props.categories, category =>
-                            <option key={category} value={category}>
-                                Show Only: {category}
-                            </option>
-                        ) }
-                    </select>
-                </div>
+                <ActionsContainer />
                 { _.map(this.props.location_groups, (locations, group_name) =>
                     <div key={group_name}>
                         <h3>{group_name}</h3>
@@ -80,10 +73,6 @@ module.exports = connect(state => {
         selectLocation(location_id, e) {
             if (this.props.selected_location === location_id) dispatch(deselectLocation());
             else dispatch(selectLocation(location_id));
-        },
-        setCatogoryFilter(e) {
-            if (e.target.value === 'no-filter') dispatch(setCategoryFilter(null));
-            else dispatch(setCategoryFilter(e.target.value));
         },
     }
 
