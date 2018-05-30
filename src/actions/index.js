@@ -12,6 +12,11 @@ module.exports = {
         return { type : "CREATE_LOCATION", location };
     },
 
+    updateLocation(location_id, location) {
+        // Validate
+        return { type: "UPDATE_LOCATION", location_id, location}
+    },
+
     selectLocation(location_id) {
         // Validate
         return { type: "SELECT_LOCATION", location_id };

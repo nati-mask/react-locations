@@ -36,7 +36,7 @@ module.exports = connect(state => {
         page: state.page
     }
 
-    }, dispatch => {
+}, dispatch => {
 
     return {
         navClick : (page, e) => {

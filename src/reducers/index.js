@@ -1,5 +1,5 @@
 const { combineReducers } = require('redux');
-// const lodash = require('lodash');
+const _ = require('lodash');
 
 module.exports = {
 
@@ -12,6 +12,12 @@ module.exports = {
         switch (action.type) {
             case "CREATE_LOCATION":
                 return Object.assign({}, state, {[action.location.id] : action.location})
+
+            case "UPDATE_LOCATION":
+                return _.keyBy(_.map(state, location => {
+                    if (location.id === action.location_id) return _.extend({}, action.location, {id: action.location_id});
+                    return location;
+                }), 'id');
         
             default:
                 return state;

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 const uuid = require('uuid/v4');
 
-const { createLocation, setPage } = require('../../actions');
+const { createLocation, updateLocation, setPage } = require('../../actions');
 
 class LocationContainer extends React.Component {
     constructor(props) {
@@ -36,7 +36,7 @@ class LocationContainer extends React.Component {
                 <div>
                     <input type="text" onInput={this.setLocationProp.bind(this)} name="category" value={this.state.location.category}/>
                 </div>
-                <button onClick={this.props.createLocation.bind(this)}>Save</button>
+                <button onClick={this.props.saveLocation.bind(this)}>Save</button>
             </div>
         )
     }
@@ -57,10 +57,11 @@ module.exports = connect(state => {
 }, dispatch => {
 
     return {
-        createLocation(e) {
-            dispatch(createLocation(Object.assign({}, this.state.location, {
+        saveLocation(e) {
+            if(this.props.new) dispatch(createLocation(Object.assign({}, this.state.location, {
                 id: uuid().replace(/-/g, ''),
             })));
+            else dispatch(updateLocation(this.state.location.id, this.state.location));
             dispatch(setPage('LocationsList'));
         },
     }
