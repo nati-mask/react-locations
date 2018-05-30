@@ -22,6 +22,7 @@ class CategoryContainer extends React.Component {
     }
     save() {
         this.props.updateCategory.call(this);
+        this.toogleEdit();
         data_manager.save();
     }
     render() {
