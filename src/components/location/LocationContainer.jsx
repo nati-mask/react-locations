@@ -21,24 +21,38 @@ class LocationContainer extends React.Component {
             }
         });
     }
-    render() {
+    renderEdit() {
         return (
             <div>
                 <div>
-                    <input type="text" onInput={this.setLocationProp.bind(this)} name="name" value={this.state.location.name}/>
+                    <input type="text" onChange={this.setLocationProp.bind(this)} name="name" value={this.state.location.name}/>
                 </div>
                 <div>
-                    <input type="text" onInput={this.setLocationProp.bind(this)} name="address" value={this.state.location.address}/>
+                    <input type="text" onChange={this.setLocationProp.bind(this)} name="address" value={this.state.location.address}/>
                 </div>
                 <div>
-                    <input type="text" onInput={this.setLocationProp.bind(this)} name="coordinates" value={this.state.location.coordinates}/>
+                    <input type="text" onChange={this.setLocationProp.bind(this)} name="coordinates" value={this.state.location.coordinates}/>
                 </div>
                 <div>
-                    <input type="text" onInput={this.setLocationProp.bind(this)} name="category" value={this.state.location.category}/>
+                    <input type="text" onChange={this.setLocationProp.bind(this)} name="category" value={this.state.location.category}/>
                 </div>
                 <button onClick={this.props.saveLocation.bind(this)}>Save</button>
             </div>
         )
+    }
+    renderView() {
+        return (
+            <div>
+                <div>{this.props.location.name}</div>
+                <div>{this.props.location.address}</div>
+                <div>{this.props.location.coordinates}</div>
+                <div>{this.props.location.category}</div>
+            </div>
+        )
+    }
+    render() {
+        if(this.props.editing) return this.renderEdit();
+        return this.renderView();
     }
 }
 

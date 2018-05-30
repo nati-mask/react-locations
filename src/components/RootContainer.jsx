@@ -12,9 +12,12 @@ class RootContainer extends React.Component {
     }
     renderPage() {
         switch (this.props.page) {
-            case "Location":
-                return <LocationContainer />
-        
+            case "LocationEdit":
+                return <LocationContainer editing={true}/>
+
+            case "LocationView":
+                return <LocationContainer editing={false} />
+
             default:
                 return <LocationsListContainer />
         }
