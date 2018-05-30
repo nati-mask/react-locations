@@ -34,6 +34,10 @@ module.exports = {
 
     stopLoading() {
         return { type: "STOP_LOADING" };
+    },
+
+    toogleShowGrouped() {
+        return { type: "TOOGLE_SHOW_GROUPED" };
     }
 
 }

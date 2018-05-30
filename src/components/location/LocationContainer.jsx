@@ -27,15 +27,19 @@ class LocationContainer extends React.Component {
         return (
             <div>
                 <div>
+                    Name:
                     <input type="text" onChange={this.setLocationProp.bind(this)} name="name" value={this.state.location.name}/>
                 </div>
                 <div>
+                    Address:
                     <input type="text" onChange={this.setLocationProp.bind(this)} name="address" value={this.state.location.address}/>
                 </div>
                 <div>
+                    Coordinates:
                     <input type="text" onChange={this.setLocationProp.bind(this)} name="coordinates" value={this.state.location.coordinates}/>
                 </div>
                 <div>
+                    Category:
                     <input type="text" onChange={this.setLocationProp.bind(this)} name="category" value={this.state.location.category}/>
                 </div>
                 <button onClick={this.props.saveLocation.bind(this)}>Save</button>

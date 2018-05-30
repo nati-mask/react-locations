@@ -43,5 +43,10 @@ module.exports = {
             default:
                 return state;
         }
-    }
+    },
+
+    show_grouped(state = false, action) {
+        if (action.type === "TOOGLE_SHOW_GROUPED") return !state;
+        return state;
+    },
 }

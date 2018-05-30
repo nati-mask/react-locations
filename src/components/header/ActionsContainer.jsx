@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const { setPage, deselectLocation, removeLocation } = require('../../actions');
+const { setPage, deselectLocation, removeLocation, toogleShowGrouped } = require('../../actions');
 
 class ActionsContainer extends React.Component {
     constructor(props) {
@@ -26,6 +26,11 @@ class ActionsContainer extends React.Component {
         return (
             <div style={{float : "right"}}>
                 { this.props.page === "LocationsList" && <button onClick={this.addLocation.bind(this)}>Add</button> }
+                { this.props.page === "LocationsList" &&
+                    <button onClick={this.props.toogleShowGrouped.bind(this)}>
+                        { this.props.show_grouped ? "Show All" : "Show Groups" }
+                    </button>
+                }
                 { this.props.selected_location && <button onClick={this.editLocation.bind(this)}>Edit</button> }
                 { this.props.selected_location && <button onClick={this.removeLocation.bind(this)}>Remove</button> }
                 { this.props.selected_location && <button onClick={this.viewLocation.bind(this)}>View</button> }
@@ -39,6 +44,7 @@ module.exports = connect(state => {
     return {
         page: state.page,
         selected_location: state.selected_location,
+        show_grouped : state.show_grouped,
     }
 
 }, dispatch => {
@@ -55,6 +61,9 @@ module.exports = connect(state => {
         },
         navToViewLocation: () => {
             dispatch(setPage('LocationView'));
+        },
+        toogleShowGrouped: () => {
+            dispatch(toogleShowGrouped());
         },
         navToList: () => {
             dispatch(setPage('LocationsList'));
