@@ -13,6 +13,25 @@ module.exports = {
         return state;
     },
 
+    categories(state = {}, action) {
+        switch (action.type) {
+            case "CREATE_CATEGORY":
+                return Object.assign({}, state, { [action.category.id]: action.category })
+
+            case "UPDATE_CATEGORY":
+                return _.keyBy(_.map(state, category => {
+                    if (category.id === action.category_id) return _.extend({}, action.category, { id: action.category_id });
+                    return category;
+                }), 'id');
+
+            case "REMOVE_CATEGORY":
+                return _.keyBy(_.filter(state, category => category.id !== action.category_id), 'id');
+
+            default:
+                return state;
+        }
+    },
+
     locations(state = {}, action) {
         switch (action.type) {
             case "CREATE_LOCATION":

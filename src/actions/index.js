@@ -32,6 +32,22 @@ module.exports = {
         return { type: "DESELECT_LOCATION" };
     },
 
+    createCategory(category) {
+        if (!category.id) throw new Error('cannot dispatch createCategory with no category id');
+        // Validate more
+        return { type: "CREATE_CATEGORY", category };
+    },
+
+    updateCategory(category_id, category) {
+        // Validate
+        return { type: "UPDATE_CATEGORY", category_id, category }
+    },
+
+    removeCategory(category_id) {
+        // Validate
+        return { type: "REMOVE_CATEGORY", category_id };
+    },
+
     stopLoading() {
         return { type: "STOP_LOADING" };
     },

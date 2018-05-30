@@ -23,6 +23,9 @@ class LocationContainer extends React.Component {
             }
         });
     }
+    setLocationCatogory(e) {
+
+    }
     renderEdit() {
         return (
             <div>
@@ -40,7 +43,14 @@ class LocationContainer extends React.Component {
                 </div>
                 <div>
                     Category:
-                    <input type="text" onChange={this.setLocationProp.bind(this)} name="category" value={this.state.location.category}/>
+                    <select name="category" onChange={this.setLocationProp.bind(this)} value={this.state.location.category || "no-category"}>
+                        <option value="no-category">Select Category</option>
+                        {_.map(this.props.categories, category =>
+                            <option key={category.id} value={category.name}>
+                                {category.name}
+                            </option>
+                        )}
+                    </select>
                 </div>
                 <button onClick={this.props.saveLocation.bind(this)}>Save</button>
             </div>
@@ -49,10 +59,10 @@ class LocationContainer extends React.Component {
     renderView() {
         return (
             <div>
-                <div>{this.props.location.name}</div>
-                <div>{this.props.location.address}</div>
-                <div>{this.props.location.coordinates}</div>
-                <div>{this.props.location.category}</div>
+                <div>Name:{this.props.location.name}</div>
+                <div>Address:{this.props.location.address}</div>
+                <div>Coordinates:{this.props.location.coordinates}</div>
+                <div>Category:{this.props.location.category}</div>
             </div>
         )
     }
@@ -71,7 +81,8 @@ module.exports = connect(state => {
             address: "",
             coordinates: "",
             category: "",
-        }
+        },
+        categories: state.categories
     }
 
 }, dispatch => {

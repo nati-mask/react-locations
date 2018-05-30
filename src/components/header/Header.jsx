@@ -2,7 +2,7 @@ import React from 'react';
 
 const ActionsContainer = require('./ActionsContainer.jsx');
 
-module.exports = class Root extends React.Component {
+module.exports = class Header extends React.Component {
     constructor(props) {
         super(props);
     }

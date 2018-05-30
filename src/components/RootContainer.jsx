@@ -5,28 +5,18 @@ const _ = require('lodash');
 
 const store = require('../store');
 
+const data_manager = require('../data-manager.js');
+
 const LocationContainer = require('./location/LocationContainer.jsx');
 const Header = require('./header/Header.jsx');
+const NavContainer = require('./nav/NavContainer.jsx');
 const LocationsListContainer = require('./locations-list/LocationsListContainer.jsx');
+const CategoriesListContainer = require('./categories-list/CategoriesListContainer.jsx');
 
 class RootContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.loadData();
-    }
-    // TODO: extract to "data-manager"
-    loadData() {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                let loaded_locations, str_locations = window.localStorage.getItem("myLocationsData");
-                if (!str_locations) return;
-                loaded_locations = JSON.parse(str_locations);
-                _.map(loaded_locations, location => {
-                    store.dispatch(createLocation(location));
-                })
-                store.dispatch(stopLoading());
-            });
-        })
+        data_manager.load();
     }
     renderPage() {
         switch (this.props.page) {
@@ -35,6 +25,9 @@ class RootContainer extends React.Component {
 
             case "LocationView":
                 return <LocationContainer editing={false} />
+
+            case "CategoriesList":
+                return <CategoriesListContainer />
 
             default:
                 return <LocationsListContainer />
@@ -52,7 +45,7 @@ class RootContainer extends React.Component {
             <div>
                 <Header pageTitle={ this.props.page } />
                 { this.renderPage() }
-                <button onClick={ this.props.navClick.bind(this, "Categories") }>Nav</button>
+                <NavContainer />
             </div>
         )
     }
