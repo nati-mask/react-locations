@@ -1,6 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux'
 
-const Root = require('./components/Root.jsx');
+const RootContainer = require('./components/RootContainer.jsx');
 
-module.exports = render(<Root />, document.getElementById('root'));
+const store = require('./store');
+
+window.app_store = store;
+
+module.exports = render(
+
+    <Provider store={store}>
+        <RootContainer />
+    </Provider>, document.getElementById('root')
+
+);
