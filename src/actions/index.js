@@ -17,6 +17,11 @@ module.exports = {
         return { type: "UPDATE_LOCATION", location_id, location}
     },
 
+    removeLocation(location_id) {
+        // Validate
+        return { type: "REMOVE_LOCATION", location_id};
+    },
+
     selectLocation(location_id) {
         // Validate
         return { type: "SELECT_LOCATION", location_id };

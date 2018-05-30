@@ -18,7 +18,10 @@ module.exports = {
                     if (location.id === action.location_id) return _.extend({}, action.location, {id: action.location_id});
                     return location;
                 }), 'id');
-        
+
+            case "REMOVE_LOCATION":
+                return _.keyBy(_.filter(state, location => location.id !== action.location_id), 'id');
+
             default:
                 return state;
         }
