@@ -6,6 +6,8 @@ const { createLocation, updateLocation, setPage } = require('../../actions');
 
 const data_manager = require('../../data-manager');
 
+require('./LocationContainer.less');
+
 class LocationContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -28,21 +30,21 @@ class LocationContainer extends React.Component {
     }
     renderEdit() {
         return (
-            <div>
-                <div>
-                    Name:
-                    <input type="text" onChange={this.setLocationProp.bind(this)} name="name" value={this.state.location.name}/>
+            <div className="page location">
+                <div className="form-field">
+                    <div className="label"> Name: </div>
+                    <input className="text-input" type="text" onChange={this.setLocationProp.bind(this)} name="name" value={this.state.location.name}/>
                 </div>
-                <div>
-                    Address:
-                    <input type="text" onChange={this.setLocationProp.bind(this)} name="address" value={this.state.location.address}/>
+                <div className="form-field">
+                    <div className="label"> Address: </div>
+                    <input className="text-input" type="text" onChange={this.setLocationProp.bind(this)} name="address" value={this.state.location.address}/>
                 </div>
-                <div>
-                    Coordinates:
-                    <input type="text" onChange={this.setLocationProp.bind(this)} name="coordinates" value={this.state.location.coordinates}/>
+                <div className="form-field">
+                    <div className="label"> Coordinates: </div>
+                    <input className="text-input" type="text" onChange={this.setLocationProp.bind(this)} name="coordinates" value={this.state.location.coordinates}/>
                 </div>
-                <div>
-                    Category:
+                <div className="form-field">
+                    <div className="label"> Category: </div>
                     <select name="category" onChange={this.setLocationProp.bind(this)} value={this.state.location.category || "no-category"}>
                         <option value="no-category">Select Category</option>
                         {_.map(this.props.categories, category =>
@@ -52,7 +54,7 @@ class LocationContainer extends React.Component {
                         )}
                     </select>
                 </div>
-                <button onClick={this.props.saveLocation.bind(this)}>Save</button>
+                <i className="material-icons save-button" onClick={this.props.saveLocation.bind(this)}>check_circle</i>
             </div>
         )
     }
