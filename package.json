@@ -1,0 +1,38 @@
+{
+  "name": "react-locations",
+  "version": "1.0.0",
+  "description": "Sample locations manage app",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nati-mask/react-locations.git"
+  },
+  "author": "Nati Mask",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/nati-mask/react-locations/issues"
+  },
+  "homepage": "https://github.com/nati-mask/react-locations#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "es6-promise": "^4.2.4",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.10.2",
+    "webpack-cli": "^2.1.4",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {}
+}
