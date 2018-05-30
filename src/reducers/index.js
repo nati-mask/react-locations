@@ -4,7 +4,12 @@ const _ = require('lodash');
 module.exports = {
 
     page(state = "LocationsList", action) {
-        if(action.type === "SET_PAGE") return action.page;
+        if (action.type === "SET_PAGE") return action.page;
+        return state;
+    },
+
+    loading(state = true, action) {
+        if (action.type === "STOP_LOADING") return false;
         return state;
     },
 

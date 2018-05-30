@@ -8,7 +8,8 @@ module.exports = {
     },
 
     createLocation(location) {
-        // Validate
+        if(!location.id) throw new Error('cannot dispatch createLocation with no location id');
+        // Validate more
         return { type : "CREATE_LOCATION", location };
     },
 
@@ -29,6 +30,10 @@ module.exports = {
 
     deselectLocation(location_id) {
         return { type: "DESELECT_LOCATION" };
+    },
+
+    stopLoading() {
+        return { type: "STOP_LOADING" };
     }
 
 }
