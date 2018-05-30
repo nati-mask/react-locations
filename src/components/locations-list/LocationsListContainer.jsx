@@ -24,6 +24,8 @@ function sortGroups(groups) {
     return sorted_groups;
 }
 
+require('./LocationsListContainer.less');
+
 class LocationListContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -32,20 +34,22 @@ class LocationListContainer extends React.Component {
         return (
             <div className="page locations-list">
                 <ActionsContainer />
-                { _.map(this.props.location_groups, (locations, group_name) =>
-                    <div key={group_name}>
-                        <h3>{group_name}</h3>
-                        <ul>
-                        { locations.map(location =>
-                            <li key={location.id}
-                                onClick={this.props.selectLocation.bind(this, location.id)}
-                                className={this.props.selected_location === location.id ? "active" : null}>
-                                {location.name} {location.category && <span>({location.category})</span>}
-                            </li>
-                        ) }
-                        </ul>
-                    </div>
-                ) }
+                <div className="location-groups">
+                    { _.map(this.props.location_groups, (locations, group_name) =>
+                        <div className="group" key={group_name}>
+                            <h3>{group_name}</h3>
+                            <ul className="group-items">
+                            { locations.map(location =>
+                                <li key={location.id}
+                                    onClick={this.props.selectLocation.bind(this, location.id)}
+                                    className={this.props.selected_location === location.id ? "item active" : "item"}>
+                                    {location.name} {location.category && <span>({location.category})</span>}
+                                </li>
+                            ) }
+                            </ul>
+                        </div>
+                    ) }
+                </div>
             </div>
         )
     }
@@ -58,7 +62,7 @@ module.exports = connect(state => {
     if (state.show_grouped || state.filter_category) {
         location_groups = makeGroups(state.locations);
         if (state.filter_category) location_groups = _.pick(location_groups, state.filter_category);
-    } else location_groups = { all: _.map(state.locations) }
+    } else location_groups = { "All Categories": _.map(state.locations) }
 
     return {
         selected_location : state.selected_location,

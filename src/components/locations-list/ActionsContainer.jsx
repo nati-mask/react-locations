@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 const { setPage, setCategoryFilter, deselectLocation, removeLocation, toogleShowGrouped } = require('../../actions');
 
+const data_manager = require('../../data-manager');
+
 require('./ActionsContainer.less');
 
 class ActionsContainer extends React.Component {
@@ -23,6 +25,7 @@ class ActionsContainer extends React.Component {
         this.props.navToList();
         this.props.deselectLocation();
         this.props.removeLocation(this.props.selected_location);
+        data_manager.save();
     }
     render() {
         return (
@@ -43,9 +46,9 @@ class ActionsContainer extends React.Component {
                 }
                 { this.props.selected_location &&
                     <div style={{float:"right"}}>
-                        <button onClick={this.editLocation.bind(this)}>Edit</button>
-                        <button onClick={this.removeLocation.bind(this)}>Remove</button>
-                        <button onClick={this.viewLocation.bind(this)}>View</button>
+                        <i className="material-icons item-action" onClick={this.editLocation.bind(this)}>edit</i>
+                        <i className="material-icons item-action" onClick={this.removeLocation.bind(this)}>delete</i>
+                        <i className="material-icons item-action" onClick={this.viewLocation.bind(this)}>remove_red_eye</i>
                     </div>
                 }
             </div>
